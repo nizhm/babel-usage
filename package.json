@@ -1,0 +1,29 @@
+{
+  "name": "babel-usage",
+  "version": "1.0.0",
+  "description": "Learning how to use babel",
+  "main": "index.js",
+  "scripts": {
+    "babel": "babel --config-file ./babel.config.js src -d dist",
+    "babel:arrow": "babel --config-file ./babel.arrow.config.js src -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nizhm/babel-usage.git"
+  },
+  "keywords": [
+    "babel"
+  ],
+  "author": "nizhm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nizhm/babel-usage/issues"
+  },
+  "homepage": "https://github.com/nizhm/babel-usage#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.21.5",
+    "@babel/plugin-transform-arrow-functions": "^7.21.5",
+    "@babel/preset-env": "^7.21.5"
+  }
+}
