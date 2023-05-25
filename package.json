@@ -4,8 +4,9 @@
   "description": "Learning how to use babel",
   "main": "index.js",
   "scripts": {
+    "babel:help": "babel --help",
     "babel": "babel --config-file ./babel.config.js src -d dist",
-    "babel:arrow": "babel --config-file ./babel.arrow.config.js src -d dist"
+    "babel:arrow": "babel ./src --out-dir ./dist --config-file ./babel.arrow.config.js"
   },
   "repository": {
     "type": "git",
