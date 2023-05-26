@@ -12,7 +12,7 @@ module.exports = {
           ie: "8"
         },
         useBuiltIns: "usage",
-        corejs: "3.6.4"
+        corejs: "2.6.12" // 要对应@babel/polyfill中的core-js版本，否则bundle中的引入路径可能不对
       }
     ]
   ]

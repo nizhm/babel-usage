@@ -3,6 +3,7 @@ module.exports = {
   // compact: true,
   // minified: true,
   plugins: [
-    "@babel/plugin-transform-arrow-functions"
+    // @see https://babeljs.io/docs/babel-plugin-transform-arrow-functions
+    ["@babel/plugin-transform-arrow-functions", { spec: true }]
   ]
 }

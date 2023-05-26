@@ -6,7 +6,8 @@
   "scripts": {
     "babel:help": "babel --help",
     "babel": "babel --config-file ./babel.config.js src -d dist",
-    "babel:arrow": "babel ./src --out-dir ./dist --config-file ./babel.arrow.config.js"
+    "babel:arrow": "babel ./src --out-dir ./dist --config-file ./babel.arrow.config.js",
+    "babel:rollup": "rollup --config"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,15 @@
     "@babel/cli": "^7.21.5",
     "@babel/core": "^7.21.5",
     "@babel/plugin-transform-arrow-functions": "^7.21.5",
-    "@babel/preset-env": "^7.21.5"
+    "@babel/preset-env": "^7.21.5",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "rollup": "^3.23.0",
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
   }
 }
