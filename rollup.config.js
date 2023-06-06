@@ -4,38 +4,63 @@ const RollupPluginNodeResolve = require('@rollup/plugin-node-resolve');
 const RollupPluginCommonjs = require('@rollup/plugin-commonjs');
 const RollupPluginBabel = require('@rollup/plugin-babel');
 
+// 入口文件名
+const inputFileName = 'main';
+
 module.exports = {
-  input: 'src/watermark.js',
+  input: `src/${inputFileName}.js`,
   output: [
     {
-      file: 'dist/watermark.umd.js',
-      format: 'umd',
-      name: 'watermark' // global value for iife/umd
-    },
-    {
-      file: 'dist/watermark.umd.min.js',
-      format: 'umd',
-      name: 'watermark', // global value for iife/umd
-      sourcemap: true,
-      plugins: [RollupPluginTerser.terser()]
-    },
-    {
-      file: 'dist/watermark.esm.js',
+      file: `dist/${inputFileName}.esm.js`,
       format: 'es'
     },
     {
-      file: 'dist/watermark.esm.min.js',
+      file: `dist/${inputFileName}.esm.min.js`,
       format: 'es',
       sourcemap: true,
       plugins: [RollupPluginTerser.terser()]
     },
     {
-      file: 'dist/watermark.common.js',
+      file: `dist/${inputFileName}.cmd.js`,
       format: 'cjs'
     },
     {
-      file: 'dist/watermark.common.min.js',
+      file: `dist/${inputFileName}.cmd.min.js`,
       format: 'cjs',
+      sourcemap: true,
+      plugins: [RollupPluginTerser.terser()]
+    },
+    {
+      file: `dist/${inputFileName}.amd.js`,
+      format: 'amd'
+    },
+    {
+      file: `dist/${inputFileName}.amd.min.js`,
+      format: 'amd',
+      sourcemap: true,
+      plugins: [RollupPluginTerser.terser()]
+    },
+    {
+      file: `dist/${inputFileName}.iife.js`,
+      format: 'iife',
+      name: inputFileName // global value for iife/umd
+    },
+    {
+      file: `dist/${inputFileName}.iife.min.js`,
+      format: 'iife',
+      name: inputFileName, // global value for iife/umd
+      sourcemap: true,
+      plugins: [RollupPluginTerser.terser()]
+    },
+    {
+      file: `dist/${inputFileName}.umd.js`,
+      format: 'umd',
+      name: inputFileName // global value for iife/umd
+    },
+    {
+      file: `dist/${inputFileName}.umd.min.js`,
+      format: 'umd',
+      name: inputFileName, // global value for iife/umd
       sourcemap: true,
       plugins: [RollupPluginTerser.terser()]
     }
