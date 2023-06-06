@@ -44,4 +44,7 @@ npm run babel
 
 # transform by preset-env and bundle into single js file
 npm run babel:rollup
+
+# transform multiple entries by preset-env into bundles
+npm run babel:rollup:multiple
 ```

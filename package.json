@@ -7,7 +7,8 @@
     "babel:help": "babel --help",
     "babel": "babel --config-file ./babel.config.js src -d dist",
     "babel:arrow": "babel ./src --out-dir ./dist --config-file ./babel.arrow.config.js",
-    "babel:rollup": "rollup --config"
+    "babel:rollup": "rollup --config",
+    "babel:rollup:multiple": "node multiple-transform.js"
   },
   "repository": {
     "type": "git",
