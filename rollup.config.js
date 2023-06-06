@@ -4,67 +4,42 @@ const RollupPluginNodeResolve = require('@rollup/plugin-node-resolve');
 const RollupPluginCommonjs = require('@rollup/plugin-commonjs');
 const RollupPluginBabel = require('@rollup/plugin-babel');
 
-// 入口文件名
-const inputFileName = 'main';
-
 module.exports = {
-  input: `src/${inputFileName}.js`,
-  output: [
-    {
-      file: `dist/${inputFileName}.esm.js`,
-      format: 'es'
+  input: {
+    watermark: `src/watermark.js`
+    // main: `src/main.js`
+  },
+  output: ['es', 'cjs', 'amd', 'umd', 'iife'].reduce(
+    (pre, format) => {
+      const outputArr = [
+        {
+          dir: `dist`,
+          entryFileNames: '[name]/[name].[format].js',
+          chunkFileNames: '[name].[format].js',
+          format
+        },
+        {
+          dir: `dist`,
+          entryFileNames: '[name]/[name].[format].min.js',
+          chunkFileNames: '[name].[format].min.js',
+          format,
+          sourcemap: true,
+          plugins: [RollupPluginTerser.terser()]
+        }
+      
+      ];
+      
+      // global value for iife/umd
+      if (['iife', 'umd'].includes(format)) {
+        outputArr.forEach(item => item['name'] = format);
+      }
+      
+      pre.push(...outputArr);
+      
+      return pre;
     },
-    {
-      file: `dist/${inputFileName}.esm.min.js`,
-      format: 'es',
-      sourcemap: true,
-      plugins: [RollupPluginTerser.terser()]
-    },
-    {
-      file: `dist/${inputFileName}.cmd.js`,
-      format: 'cjs'
-    },
-    {
-      file: `dist/${inputFileName}.cmd.min.js`,
-      format: 'cjs',
-      sourcemap: true,
-      plugins: [RollupPluginTerser.terser()]
-    },
-    {
-      file: `dist/${inputFileName}.amd.js`,
-      format: 'amd'
-    },
-    {
-      file: `dist/${inputFileName}.amd.min.js`,
-      format: 'amd',
-      sourcemap: true,
-      plugins: [RollupPluginTerser.terser()]
-    },
-    {
-      file: `dist/${inputFileName}.iife.js`,
-      format: 'iife',
-      name: inputFileName // global value for iife/umd
-    },
-    {
-      file: `dist/${inputFileName}.iife.min.js`,
-      format: 'iife',
-      name: inputFileName, // global value for iife/umd
-      sourcemap: true,
-      plugins: [RollupPluginTerser.terser()]
-    },
-    {
-      file: `dist/${inputFileName}.umd.js`,
-      format: 'umd',
-      name: inputFileName // global value for iife/umd
-    },
-    {
-      file: `dist/${inputFileName}.umd.min.js`,
-      format: 'umd',
-      name: inputFileName, // global value for iife/umd
-      sourcemap: true,
-      plugins: [RollupPluginTerser.terser()]
-    }
-  ],
+    []
+  ),
   plugins: [
     RollupPluginClear({
       // required, point out which directories should be clear.
