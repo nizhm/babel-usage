@@ -4,11 +4,16 @@ const RollupPluginNodeResolve = require('@rollup/plugin-node-resolve');
 const RollupPluginCommonjs = require('@rollup/plugin-commonjs');
 const RollupPluginBabel = require('@rollup/plugin-babel');
 
+const entriesArr = [
+  { entryName: 'watermark', entry: `src/watermark.js` },
+  { entryName: 'main', entry: `src/main.js` }
+];
+
+// 取第一个作为入口
+const singleEntry = entriesArr[0];
+
 module.exports = {
-  input: {
-    watermark: `src/watermark.js`
-    // main: `src/main.js`
-  },
+  input: { [singleEntry.entryName]: singleEntry.entry },
   output: ['es', 'cjs', 'amd', 'umd', 'iife'].reduce(
     (pre, format) => {
       const outputArr = [
@@ -31,7 +36,7 @@ module.exports = {
       
       // global value for iife/umd
       if (['iife', 'umd'].includes(format)) {
-        outputArr.forEach(item => item['name'] = format);
+        outputArr.forEach(item => item['name'] = singleEntry.entryName);
       }
       
       pre.push(...outputArr);
