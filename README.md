@@ -62,4 +62,4 @@ npm run babel:rollup:multiple
     ```shell
     npm run babel:rollup:multiple
     ```
-4. Find all bundles in `dist` directory(include esm/commonjs/amd/umc/iife formats)
+4. Find all bundles in `dist` directory(include esm/commonjs/amd/umd/iife formats)
