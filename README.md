@@ -48,3 +48,18 @@ npm run babel:rollup
 # transform multiple entries by preset-env into bundles
 npm run babel:rollup:multiple
 ```
+
+### Steps
+1. Add js file to `src` directory
+2. Add a new entry item into `entries.js`
+3. Run script
+
+    3.1  `babel:rollup` to bundle single js file (make sure your entry is the first position in step 2)
+    ```shell
+    npm run babel:rollup
+    ```
+    3.2  `babel:rollup:multiple` to bundle multiple js file
+    ```shell
+    npm run babel:rollup:multiple
+    ```
+4. Find all bundles in `dist`(include esm/commonjs/amd/umc/iife formats)
