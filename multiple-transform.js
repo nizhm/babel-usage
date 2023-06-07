@@ -1,5 +1,6 @@
 const { rollup } = require('rollup');
 const { output, plugins } = require('./rollup.config');
+const { entriesArr } = require('./entries');
 
 /**
  * impossible to disable Rollup code-splitting
@@ -9,26 +10,15 @@ const { output, plugins } = require('./rollup.config');
  * @see https://rollupjs.org/javascript-api/#rollup-rollup
  */
 
-// 多入口
-const entries = {
-  watermark: `src/watermark.js`,
-  main: `src/main.js`,
-  freeze: `src/freeze.js`
-};
-
 // 去掉自动清空dist目录
 const pluginsOptions = plugins.filter(item => item.name !== 'clear');
 
-// 复用output
-const outputOptions = output;
-
-build();
-
 async function build() {
   
-  const entryArr = Object.entries(entries).map(item => ({ [item[0]]: item[1] }));
+  // 入口列表转rollup的input格式
+  const singleEntryArr = entriesArr.map(item => ({ [item.entryName]: item.entry }));
   
-  for await (const entry of entryArr) {
+  for await (const entry of singleEntryArr) {
     const inputOptions = { input: entry, plugins: pluginsOptions };
     
     
@@ -37,7 +27,16 @@ async function build() {
     try {
       bundle = await rollup(inputOptions);
       
-      for (const outputOption of outputOptions) { await bundle.write(outputOption); }
+      for (const outputOption of output) {
+        const outputOpt = { ...outputOption };
+        
+        // 设置一下iife、umd的全局变量名
+        if (['iife', 'umd'].includes(outputOpt.format)) {
+          outputOpt.name = Object.keys(entry)[0];
+        }
+        
+        await bundle.write(outputOpt);
+      }
     } catch (error) {
       buildFailed = true;
       console.error(error);
@@ -47,3 +46,5 @@ async function build() {
     }
   }
 }
+
+build();

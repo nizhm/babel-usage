@@ -4,10 +4,7 @@ const RollupPluginNodeResolve = require('@rollup/plugin-node-resolve');
 const RollupPluginCommonjs = require('@rollup/plugin-commonjs');
 const RollupPluginBabel = require('@rollup/plugin-babel');
 
-const entriesArr = [
-  { entryName: 'watermark', entry: `src/watermark.js` },
-  { entryName: 'main', entry: `src/main.js` }
-];
+const { entriesArr } = require('./entries');
 
 // 取第一个作为入口
 const singleEntry = entriesArr[0];
