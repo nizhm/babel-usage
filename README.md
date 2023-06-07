@@ -50,7 +50,7 @@ npm run babel:rollup:multiple
 ```
 
 ### Steps
-1. Add js file to `src` directory
+1. Add js file(s) to `src` directory
 2. Add a new entry item into `entries.js`
 3. Run script
 
@@ -62,4 +62,4 @@ npm run babel:rollup:multiple
     ```shell
     npm run babel:rollup:multiple
     ```
-4. Find all bundles in `dist`(include esm/commonjs/amd/umc/iife formats)
+4. Find all bundles in `dist` directory(include esm/commonjs/amd/umc/iife formats)
